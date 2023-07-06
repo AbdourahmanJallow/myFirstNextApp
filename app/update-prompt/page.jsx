@@ -29,16 +29,16 @@ function EditPrompt() {
     // const { data: session } = useSession();
     const router = useRouter();
 
-    const createPrompt = async (e) => {
+    const updatePrompt = async (e) => {
         e.preventDefault();
         setSubmitting(true);
 
+        if (!promptId) return alert('Prompt ID not provided!');
         try {
-            const response = await fetch('/api/prompt/new', {
-                method: 'POST',
+            const response = await fetch(`/api/prompt/${promptId}`, {
+                method: 'PATCH',
                 body: JSON.stringify({
                     prompt: post.prompt,
-                    userId: session?.user.id,
                     tag: post.tag
                 })
             });
@@ -57,7 +57,7 @@ function EditPrompt() {
             type='Edit'
             post={post}
             setPost={setPost}
-            handleSubmit={createPrompt}
+            handleSubmit={updatePrompt}
             submitting={submitting}
         />
     );

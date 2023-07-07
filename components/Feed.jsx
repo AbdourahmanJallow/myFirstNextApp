@@ -29,11 +29,19 @@ function Feed() {
         const fetchPosts = async () => {
             const response = await fetch('/api/prompt');
             const data = await response.json();
-            setPosts(data);
+            // console.log(data);
+            const filtered = data.filter(
+                (item) =>
+                    item.prompt.includes(searchText) ||
+                    item.tag.includes(searchText) ||
+                    item.creator.username.includes(searchText)
+            );
+            setPosts(filtered);
         };
 
         fetchPosts();
-    }, []);
+    }, [searchText]);
+
     return (
         <section className='feed'>
             <form className='relative w-full flex-center'>

@@ -21,8 +21,8 @@ function Feed() {
     const [searchText, setSearchText] = useState('');
     const [posts, setPosts] = useState([]);
 
-    const handleSearchChange = (e) => {
-        e.preventDefault();
+    const handleSearchChange = (tag) => {
+        setSearchText(tag);
     };
 
     useEffect(() => {
